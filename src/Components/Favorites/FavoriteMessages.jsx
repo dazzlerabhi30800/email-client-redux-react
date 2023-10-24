@@ -5,7 +5,6 @@ export default function FavoriteMessages() {
 
     const { favoriteMessages, readMessage } = useSelector(data => data.emailSlice);
 
-    console.log(favoriteMessages);
 
 
 
