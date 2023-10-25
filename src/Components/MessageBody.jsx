@@ -24,6 +24,7 @@ export default function MessageBody() {
 
 
 
+
   return (
     <section className="email-section message-body">
       <div className="profile-image message-img">F</div>
@@ -31,7 +32,7 @@ export default function MessageBody() {
         <div className="message-info-container">
           <div className="message-info">
             <h1>{readMessage?.from.name}</h1>
-            <p>{localTime(readMessage?.date)}</p>
+            <p className="message-time">{localTime(readMessage?.date)}</p>
           </div>
           <button
             onClick={() => dispatch(handleFavorite(readMessage?.id))}
