@@ -30,6 +30,7 @@ const emailSlice = createSlice({
       state.readMessages = state.emailMessages.filter(
         (msg) => msg?.read === true,
       );
+      state.favoriteMessages = state.emailMessages.filter(msg => msg.favorite === true);
       if (state.readMessage && state.readMessage.id === action.payload) {
         return;
       }
@@ -40,6 +41,9 @@ const emailSlice = createSlice({
     setReadMessage: (state, action) => {
       state.readMessage = action.payload;
     },
+    testFunction: (state, action) => {
+      console.log("test function");
+    },
     handleFavorite: (state, action) => {
       state.emailMessages = state.emailMessages.map((msg) => {
         if (msg.id === action.payload) {
@@ -47,11 +51,7 @@ const emailSlice = createSlice({
         }
         return msg;
       });
-      state.favoriteMessages = state.emailMessages
-        .map((msg) => {
-          return { ...msg, current: false };
-        })
-        .filter((msg) => msg.favorite === true);
+      state.favoriteMessages = state.emailMessages.filter((msg) => msg.favorite === true);
       if (action.payload === state.readMessage.id) {
         state.readMessage = {
           ...state.readMessage,
@@ -74,6 +74,7 @@ export const {
   setReadMessage,
   handleFavorite,
   setLoading,
+  testFunction
 } = emailSlice.actions;
 
 export default store;
