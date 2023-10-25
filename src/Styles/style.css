@@ -178,11 +178,11 @@ main {
   color: #fff;
 }
 
+
 .message-desc div {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transform: rotate(0.1deg);
   padding: 1rem 0;
   font-size: 0.95rem;
 }

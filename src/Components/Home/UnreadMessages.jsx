@@ -21,6 +21,8 @@ export default function UnreadMessages() {
     fetchMessages();
   }, []);
 
+
+
   return (
     <section className={`email-section messages ${readMessage && "shrink"}`}>
       {emailMessages.length > 0 && !loading ? (
@@ -42,3 +44,4 @@ export default function UnreadMessages() {
     </section>
   );
 }
+
