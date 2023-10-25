@@ -12,7 +12,6 @@ const emailSlice = createSlice({
   reducers: {
     setEmailMessages: (state, action) => {
       const messages = [...action.payload];
-      // state.emailMessages = [...action.payload];
       state.emailMessages = messages.map((msg) => {
         return { ...msg, current: false, favorite: false, read: false };
       });

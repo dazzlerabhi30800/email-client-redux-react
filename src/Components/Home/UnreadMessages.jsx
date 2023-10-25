@@ -23,12 +23,19 @@ export default function UnreadMessages() {
 
   return (
     <section className={`email-section messages ${readMessage && "shrink"}`}>
-      {emailMessages && !loading ? (
+      {emailMessages.length > 0 && !loading ? (
         emailMessages.map((msg, index) => {
           return <MessageCard key={index} msg={msg} />;
         })
       ) : (
-        <div style={{ margin: "5px auto", width: "fit-content" }}>
+        <div
+          style={{
+            margin: "5px auto",
+            width: "fit-content",
+            fontSize: "1.8rem",
+            fontWeight: "500",
+          }}
+        >
           Fetching Messages...
         </div>
       )}

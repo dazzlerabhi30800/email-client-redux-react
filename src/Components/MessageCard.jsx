@@ -1,12 +1,9 @@
 import { useDispatch } from "react-redux"
 import { handleRead } from "../../store/Slice";
+import { localTime } from "../utils/FuncUtils";
 
 export default function MessageCard({ msg }) {
     const dispatch = useDispatch();
-    const localTime = (time) => {
-        let date = new Date(time);
-        return date.toString().slice(0, 25);
-    }
     return (
         <div className={`message ${msg.read && "active"} ${msg.current && "current"}`} onClick={() => dispatch(handleRead(msg.id))}>
             <div className="profile-image">F</div>
