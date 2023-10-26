@@ -10,7 +10,6 @@ export default function MessageBody() {
   const dispatch = useDispatch();
 
   async function fetchReadItem() {
-    // dispatch(setReadMessage({ ...readMessage, body: null }));
     const data = await fetch(
       `https://flipkart-email-mock.now.sh/?id=${readMessage.id}`,
     );
