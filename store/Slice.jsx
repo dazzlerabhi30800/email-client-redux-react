@@ -1,4 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
 
 const emailSlice = createSlice({
   name: "emailMessages",
@@ -62,10 +65,26 @@ const emailSlice = createSlice({
   },
 });
 
+
+
+// For Local Storage configuration
+
+const persistConfig = {
+  key: 'emailSlice',
+  blacklist: ['loading', 'readMessage'],
+  storage,
+}
+
+
+// const persistedEmailReducer = persistReducer(persistConfig, emailSlice.reducer);
+
+
+
 const store = configureStore({
   reducer: {
-    emailSlice: emailSlice.reducer,
+    emailSlice: persistReducer(persistConfig, emailSlice.reducer),
   },
+  middleware: [thunk]
 });
 
 export const {
@@ -78,3 +97,6 @@ export const {
 } = emailSlice.actions;
 
 export default store;
+
+
+export const persistor = persistStore(store);
