@@ -37,9 +37,10 @@ const emailSlice = createSlice({
       if (state.readMessage && state.readMessage.id === action.payload) {
         return;
       }
-      state.readMessage = state.emailMessages.find(
+      const messageFound = state.emailMessages.find(
         (msg) => msg.id === action.payload,
       );
+      state.readMessage = { ...messageFound, body: null }
     },
     setReadMessage: (state, action) => {
       state.readMessage = action.payload;

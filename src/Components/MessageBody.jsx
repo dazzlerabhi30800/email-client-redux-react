@@ -3,17 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleFavorite, setReadMessage } from "../../store/Slice";
 import DOMPurify from "dompurify";
 import { localTime } from "../utils/FuncUtils";
+import Spinner from "./Spinner";
 
 export default function MessageBody() {
   const { readMessage } = useSelector((data) => data.emailSlice);
   const dispatch = useDispatch();
+
   async function fetchReadItem() {
+    // dispatch(setReadMessage({ ...readMessage, body: null }));
     const data = await fetch(
       `https://flipkart-email-mock.now.sh/?id=${readMessage.id}`,
     );
     const response = await data.json();
     if (!response) return;
-    dispatch(setReadMessage({ ...readMessage, body: response.body }));
+    setTimeout(() => {
+      dispatch(setReadMessage({ ...readMessage, body: response.body }));
+    }, 1200)
   }
 
   useEffect(() => {
@@ -48,7 +53,7 @@ export default function MessageBody() {
             }}
           ></div>
         ) : (
-          <div className="message-loader">Message is Loading...</div>
+          <Spinner />
         )}
       </div>
     </section>
