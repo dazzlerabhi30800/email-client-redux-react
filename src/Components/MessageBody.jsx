@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { handleFavorite, setReadMessage } from "../../store/Slice";
+import { handleFavorite, setLoading, setReadMessage } from "../../store/Slice";
 import DOMPurify from "dompurify";
 import { localTime } from "../utils/FuncUtils";
 import Spinner from "./Spinner";
 
 export default function MessageBody() {
-  const { readMessage, emailMessages } = useSelector((data) => data.emailSlice);
+  const { readMessage, emailMessages, loading } = useSelector((data) => data.emailSlice);
   const dispatch = useDispatch();
 
   async function fetchReadItem() {
+    dispatch(setLoading(true));
     const data = await fetch(
       `https://flipkart-email-mock.now.sh/?id=${readMessage.id}`,
     );
@@ -17,7 +18,8 @@ export default function MessageBody() {
     if (!response) return;
     setTimeout(() => {
       dispatch(setReadMessage({ ...readMessage, body: response.body }));
-    }, 1200)
+      dispatch(setLoading(false));
+    }, 1000)
   }
 
   useEffect(() => {

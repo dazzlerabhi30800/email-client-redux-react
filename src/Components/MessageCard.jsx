@@ -4,9 +4,16 @@ import { localTime } from "../utils/FuncUtils";
 
 export default function MessageCard({ msg }) {
     const dispatch = useDispatch();
-    const { loading } = useSelector(data => data.emailSlice);
+    const { loading, readMessage } = useSelector(data => data.emailSlice);
+
+    const handleMessageRead = (id) => {
+        if (loading) return;
+        dispatch(handleRead(msg.id))
+    }
+
+
     return (
-        <div className={`message ${msg?.read && "active"} ${msg?.current && "current"}`} onClick={() => !loading && dispatch(handleRead(msg.id))}>
+        <div className={`message ${msg?.read && "active"} ${loading ? readMessage.id === msg.id ? "enabled" : "disabled" : ""} ${msg?.current && "current"}`} onClick={() => handleMessageRead(msg?.id)}>
             <div className="profile-image">F</div>
             <div className="email-info">
                 <p>From: <span>{msg?.from.name} {"<"}{msg.from.email}{">"} </span></p>
@@ -22,3 +29,5 @@ export default function MessageCard({ msg }) {
         </div>
     )
 }
+
+

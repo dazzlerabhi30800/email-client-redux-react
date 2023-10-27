@@ -8,20 +8,34 @@ const emailSlice = createSlice({
   initialState: {
     emailMessages: [],
     loading: false,
+    emailLoading: false,
     readMessages: [],
     favoriteMessages: [],
     readMessage: null,
   },
   reducers: {
+
+    // sets the initial state of main unread messages
     setEmailMessages: (state, action) => {
       const messages = [...action.payload];
       state.emailMessages = messages.map((msg) => {
         return { ...msg, current: false, favorite: false, read: false };
       });
     },
+
+
+    // sets the Loading 
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
+
+
+    // sets the loading state for messages
+    setEmailLoading: (state, action) => {
+      state.emailLoading = action.payload
+    },
+
+    // handles the read state when we click on message & add it to read messages state
     handleRead: (state, action) => {
       state.emailMessages = state.emailMessages.map((msg) => {
         if (msg.id === action.payload) {
@@ -41,12 +55,14 @@ const emailSlice = createSlice({
       );
       state.readMessage = { ...messageFound, body: null }
     },
+
+
+    // sets the read message state on which we click on
     setReadMessage: (state, action) => {
       state.readMessage = action.payload;
     },
-    testFunction: (state, action) => {
-      console.log("test function");
-    },
+
+    // function to handle Favorite button functionality
     handleFavorite: (state, action) => {
       state.emailMessages = state.emailMessages.map((msg) => {
         if (msg.id === action.payload) {
@@ -64,6 +80,8 @@ const emailSlice = createSlice({
         };
       }
     },
+
+
   },
 });
 
@@ -73,7 +91,7 @@ const emailSlice = createSlice({
 
 const persistConfig = {
   key: 'emailSlice',
-  blacklist: ['loading', 'readMessage'],
+  blacklist: ['loading', 'readMessage', 'emailLoading'],
   storage,
 }
 
@@ -95,7 +113,7 @@ export const {
   setReadMessage,
   handleFavorite,
   setLoading,
-  testFunction
+  setEmailLoading,
 } = emailSlice.actions;
 
 export default store;

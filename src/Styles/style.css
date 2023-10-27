@@ -67,6 +67,16 @@ main {
   gap: 1.5rem;
   padding: 0 1rem;
   width: 100%;
+  position: relative;
+}
+
+
+.enabled {
+  opacity: 1;
+}
+
+.disabled {
+  opacity: 0.4;
 }
 
 .messages.shrink {
@@ -272,5 +282,9 @@ main {
 
   button {
     cursor: pointer;
+  }
+
+  .disabled:hover {
+    cursor: not-allowed;
   }
 }
