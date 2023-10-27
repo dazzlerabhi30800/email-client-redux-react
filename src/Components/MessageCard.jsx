@@ -1,11 +1,12 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { handleRead } from "../../store/Slice";
 import { localTime } from "../utils/FuncUtils";
 
 export default function MessageCard({ msg }) {
     const dispatch = useDispatch();
+    const { loading } = useSelector(data => data.emailSlice);
     return (
-        <div className={`message ${msg?.read && "active"} ${msg?.current && "current"}`} onClick={() => dispatch(handleRead(msg.id))}>
+        <div className={`message ${msg?.read && "active"} ${msg?.current && "current"}`} onClick={() => !loading && dispatch(handleRead(msg.id))}>
             <div className="profile-image">F</div>
             <div className="email-info">
                 <p>From: <span>{msg?.from.name} {"<"}{msg.from.email}{">"} </span></p>
