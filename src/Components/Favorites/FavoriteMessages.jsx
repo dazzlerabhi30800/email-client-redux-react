@@ -6,7 +6,6 @@ export default function FavoriteMessages() {
     (data) => data.emailSlice,
   );
 
-  console.log(favoriteMessages);
 
   return (
     <section className={`email-section messages ${readMessage && "shrink"}`}>

@@ -28,6 +28,8 @@ export default function MessageBody() {
 
 
 
+
+
   return (
     <section className="email-section message-body">
       <div className="profile-image message-img">F</div>

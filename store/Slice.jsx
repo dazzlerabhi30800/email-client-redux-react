@@ -50,10 +50,11 @@ const emailSlice = createSlice({
     handleFavorite: (state, action) => {
       state.emailMessages = state.emailMessages.map((msg) => {
         if (msg.id === action.payload) {
-          return { ...msg, favorite: !msg.favoritefalse };
+          return { ...msg, favorite: !msg.favorite };
         }
         return msg;
       });
+      state.readMessages = state.emailMessages.filter(msg => msg.read === true);
       const newFavoriteMessages = state.emailMessages.filter((msg) => msg.favorite === true);
       state.favoriteMessages = newFavoriteMessages;
       if (action.payload === state.readMessage.id) {
