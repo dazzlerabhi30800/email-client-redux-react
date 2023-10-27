@@ -30,9 +30,8 @@ const emailSlice = createSlice({
           return { ...msg, current: false };
         }
       });
-      state.readMessages = state.emailMessages.filter(
-        (msg) => msg?.read === true,
-      );
+      const newReadMessages = state.emailMessages.filter(msg => msg?.read === true);
+      state.readMessages = newReadMessages;
       state.favoriteMessages = state.emailMessages.filter(msg => msg.favorite === true);
       if (state.readMessage && state.readMessage.id === action.payload) {
         return;
@@ -55,7 +54,8 @@ const emailSlice = createSlice({
         }
         return msg;
       });
-      state.favoriteMessages = state.emailMessages.filter((msg) => msg.favorite === true);
+      const newFavoriteMessages = state.emailMessages.filter((msg) => msg.favorite === true);
+      state.favoriteMessages = newFavoriteMessages;
       if (action.payload === state.readMessage.id) {
         state.readMessage = {
           ...state.readMessage,

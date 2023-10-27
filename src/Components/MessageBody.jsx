@@ -6,7 +6,7 @@ import { localTime } from "../utils/FuncUtils";
 import Spinner from "./Spinner";
 
 export default function MessageBody() {
-  const { readMessage } = useSelector((data) => data.emailSlice);
+  const { readMessage, emailMessages } = useSelector((data) => data.emailSlice);
   const dispatch = useDispatch();
 
   async function fetchReadItem() {
@@ -24,7 +24,7 @@ export default function MessageBody() {
     if (readMessage.id) {
       fetchReadItem();
     }
-  }, [readMessage.id]);
+  }, [emailMessages]);
 
 
 
