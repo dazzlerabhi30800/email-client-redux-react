@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import MessageCard from "../MessageCard";
-import { setEmailLoading, setEmailMessages, setLoading } from "../../../store/Slice";
+import { fetchEmailMessages } from "../../../store/Slice";
 import { useEffect } from "react";
 import Spinner from "../Spinner";
 
@@ -10,20 +10,11 @@ export default function UnreadMessages() {
     (data) => data.emailSlice,
   );
 
-  async function fetchMessages() {
-    dispatch(setEmailLoading(true))
-    const data = await fetch("https://flipkart-email-mock.now.sh");
-    const { list } = await data.json();
-    dispatch(setEmailMessages(list));
-    dispatch(setEmailLoading(false))
-  }
   useEffect(() => {
-    if (emailMessages.length > 0) return;
-    fetchMessages();
-  }, []);
+    return () => dispatch(fetchEmailMessages());
+  }, [dispatch]);
 
-
-
+  if (!emailMessages) return false;
   return (
     <section className={`email-section messages ${readMessage && "shrink"}`}>
       {emailMessages.length > 0 && !emailLoading ? (
@@ -45,4 +36,3 @@ export default function UnreadMessages() {
     </section>
   );
 }
-
